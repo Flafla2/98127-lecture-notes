@@ -213,8 +213,53 @@ This is the default configuration of the Unity editor, opening a freshly-made pr
         \item If you double click on a GameObject in the hierarchy view you can focus on it in the scene view.
     \end{itemize}
     \item The \textbf{Inspector} allows you to inspect and modify the properties of whichever GameObject or Asset is selected.  For example, you can change the position of a GameObject or the name of a file.  More information on how to use the Inspector will follow.
-    \item The \textbf{Play Button} (\faPlay) will shift focus from the Scene View to the \textbf{Game View}, allowing you to play your game in real time!  When you are in ``Play Mode'', you can switch back to the Scene/Hierarchy/Inspector Panels and continue to modify the scene.  However, as soon as you stop playing (by clicking the play button again) \underline{your changes will revert to before you started playing}, so be careful!  While playing, you can also click the \textbf{Pause Button} (\faPause) to pause execution of the game (you can still make changes in the Scene View / Inspector while paused).  While paused, you can click the \textbf{Advance Frame Button} (\faFastForward) to advance by one frame.
+    \item The \textbf{Play Button} (\,\faPlay\,) will shift focus from the Scene View to the \textbf{Game View}, allowing you to play your game in real time!  When you are in ``Play Mode'', you can switch back to the Scene/Hierarchy/Inspector Panels and continue to modify the scene.  However, as soon as you stop playing (by clicking the play button again) \underline{your changes will revert to before you started playing}, so be careful!  While playing, you can also click the \textbf{Pause Button} (\,\faPause\,) to pause execution of the game (you can still make changes in the Scene View / Inspector while paused).  While paused, you can click the \textbf{Advance Frame Button} (\,\faFastForward\,) to advance by one frame.
     \item The \textbf{Scene View Tools} change the currently-active manipulator in the scene view.  These manipulators allow you to move, rotate, and scale GameObjects--more on this later.
 \end{enumerate}
+
+\section{The Scene Graph and GameObjects}
+
+\begin{wrapfigure}{r}[50pt]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.45\textwidth]{cube-menu-item}\\
+    \includegraphics[width=0.45\textwidth]{newcube}
+\end{wrapfigure}
+
+When you first open Unity, the default scene (Called \texttt{SampleScene}) is loaded.  As mentioned above, there are two GameObjects currently in the scene: a Main Camera and an Directional Light.  If you don't see any GameObjects in the hierarchy view when you load the project, click on the small triangle next to \texttt{SampleScene} in the hierarchy view to expand it.  Let's add a third GameObject in the scene; navigate to \texttt{GameObject > 3D Object > Cube} as shown on the right, and a cube should appear in your scene.  Notice the new entry ``Cube'' in the scene hierarchy view.
+
+\subsection{Manipulating GameObjects with Scene View tools}
+
+\section{Composing GameObjects with Components}
+
+\section{Importing Asset Packages}
+
+Let's go ahead and import the base assets for this lecture.  You can find the base assets at the link below:
+\begin{center}
+\href{http://stage.gamecreation.org/StuCo/packages/lec02resources.unitypackage}{http://stage.gamecreation.org/StuCo/packages/lec02resources.unitypackage}
+\end{center}
+
+\begin{wrapfigure}{r}[50pt]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{import-diag}
+    Unitypackage Import Dialog
+\end{wrapfigure}
+
+This is a .unitypackage file.  Unitypackages are a file format specifically made to import project settings and assets into Unity.  With your new project open, double click on the downloaded file to open it in Unity.  You should see the window to the right.  Click ``All'', then ``Import'' to import the files.
+
+\subsection{Using the Unity Asset Store}
+
+The \textit{Unity Asset Store} is an online store for .unitypackages.  If you don't have access to a larger team, you can use the asset store to get art, scripts, and Editor tools.  In fact, the lecture resources (linked above) contain assets from a few asset store packages (the \href{https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351}{Unity Standard Assets}, a \href{https://assetstore.unity.com/packages/3d/props/3d-crystal-gems-pack-112381}{3D Gem Models pack}, and \href{https://assetstore.unity.com/packages/2d/textures-materials/gridbox-prototype-materials-129127}{some textures for prototyping}).  You'll need a free Unity account to use the Asset Store.
+
+\section{Example Game 1: Plinko}
+
+\section{Example Game 2: Pong}
+
+\section{Example Game 3: Simple First Person Game}
+
+\subsection{Enabling ProBuilder}
+
+
+
+\section{Exercise}
 
 \end{document}
