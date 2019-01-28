@@ -21,6 +21,8 @@
 \usepackage{wrapfig}
 \usepackage{fontawesome}
 
+\usepackage{menukeys}
+
 \oddsidemargin0cm
 \topmargin-2cm
 \textwidth16.5cm
@@ -183,7 +185,7 @@ When you open Unity, you will first see the {\bf project selection screen}.  You
 
 Enter a name for your new project (``Lecture 2 Project'') and specify a location for the project folder.  Make sure ``3D'' is checked and ``Enable Unity Analytics'' is unchecked.  Then click {\it create project}.  \textbf{Unity projects are saved in folders on your machine}, so if you browse to the project location you gave then you will find the Unity project files.
 
-The Unity editor should now appear.  The editor is divided into \textbf{panels}, each providing a different way to interact with your Unity project.  If your editor doesn’t look like the one on the next page, click \textit{Layout $\rightarrow$ Default} on the top right of the editor.  Notice that panels can be reorganized and redocked to other panels by clicking and dragging on the tab at the top of each pane.  You can also resize panels and drag them out to their own window.
+The Unity editor should now appear.  The editor is divided into \textbf{panels}, each providing a different way to interact with your Unity project.  If your editor doesn’t look like the one on the next page, click \menu{Layout > Default} on the top right of the editor.  Notice that panels can be reorganized and redocked to other panels by clicking and dragging on the tab at the top of each pane.  You can also resize panels and drag them out to their own window.
 
 \pagebreak
 \section{Basic Unity Editor Panels}
@@ -204,7 +206,7 @@ This is the default configuration of the Unity editor, opening a freshly-made pr
     \end{itemize}
     \item The \textbf{Project Window} is a view into the assets of your game.  \textbf{Assets} are normal files that your game will use like scripts, 3D Models, textures (images), audio, animation data, scene files, and more.  The project window behaves much like the Finder on macOS or Explorer on Windows.
     \begin{itemize}
-        \item In fact, these files are located in the \lstinline!/Assets! subfolder of your Unity project!  Try right clicking on a file in the project window and select ``Reveal\dots''
+        \item In fact, these files are located in the \directory{/Assets} subfolder of your Unity project!  Try right clicking on a file in the project window and select ``Reveal\dots''
     \end{itemize}
     \item The \textbf{Hierarchy View} lists all of the \textbf{GameObjects} that are currently in the scene.
     \begin{itemize}
@@ -219,17 +221,91 @@ This is the default configuration of the Unity editor, opening a freshly-made pr
 
 \section{The Scene Graph and GameObjects}
 
-\begin{wrapfigure}{r}[50pt]{0.45\textwidth}
+\begin{wrapfigure}[13]{r}[50pt]{0.45\textwidth}
     \centering
     \includegraphics[width=0.45\textwidth]{cube-menu-item}\\
     \includegraphics[width=0.45\textwidth]{newcube}
 \end{wrapfigure}
 
-When you first open Unity, the default scene (Called \texttt{SampleScene}) is loaded.  As mentioned above, there are two GameObjects currently in the scene: a Main Camera and an Directional Light.  If you don't see any GameObjects in the hierarchy view when you load the project, click on the small triangle next to \texttt{SampleScene} in the hierarchy view to expand it.  Let's add a third GameObject in the scene; navigate to \texttt{GameObject > 3D Object > Cube} as shown on the right, and a cube should appear in your scene.  Notice the new entry ``Cube'' in the scene hierarchy view.
+When you first open Unity, the default scene (Called \texttt{SampleScene}) is loaded.  In Unity, a \textbf{Scene} can be considered a ``Level'' or a ``Screen'' in your game.  Scenes are saved to a .scene file in your Assets folder.  As mentioned above, there are two GameObjects currently in the scene: a Main Camera and an Directional Light.  If you don't see any GameObjects in the hierarchy view when you load the project, click on the small triangle next to \texttt{SampleScene} in the hierarchy view to expand it.  Let's add a third GameObject in the scene; navigate to \menu{GameObject > 3D Object > Cube} as shown on the right, and a cube should appear in your scene.  Notice the new entry ``Cube'' in the scene hierarchy view.
 
 \subsection{Manipulating GameObjects with Scene View tools}
 
+The Scene View Tools are located at the top left of the Unity window and are accessible at any time.  You can use the \keys{Q}\keys{W}\keys{E}\keys{R}\keys{T}\keys{Y} keys as a shortcut:
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{scene-view-tools}
+\end{center}
+
+\noindent Here are each of the manipulators, from left to right:
+
+\begin{enumerate}
+    \item The \textbf{Pan Tool} \includegraphics[width=20pt]{tool_pan.png} allows you to click and drag on the Scene View to pan the camera left / right / up / down relative to where you are looking.  You do not need to have the Pan Tool selected to right click + drag to move the camera, however.
+    \item The \textbf{Move Tool} \includegraphics[width=20pt]{tool_move.png} shows a widget when selecting any GameObject that allows you to translate the GameObject throughout the world.  Try moving the cube that you made left and right inside the scene.  You can hold \keys{\cmd Cmd} on Mac or \keys{\ctrl} on Windows to snap GameObject translation to regular increments; navigate to \menu{Edit > Snap Settings\dots} to customize snapping settings.
+    \item The \textbf{Rotate Tool} \includegraphics[width=20pt]{tool_rot.png} shows a similar widget that allows you to rotate GameObjects.  You can click and drag on the Red/Blue/Green circles to constrain rotation to one axis, or you can click and drag elsewhere on the widget to rotate the GameObject freely.  Again, you can hold \keys{\cmd Cmd} on Mac or \keys{\ctrl} on Windows to snap rotation to regular degree increments.  As with translation you can customize snapping via \menu{Edit > Snap Settings\dots}.
+    \item The \textbf{Scale Tool} \includegraphics[width=20pt]{tool_scale.png} similarly allows you to scale objects in any dimension.  You can scale in all dimensions by clicking and dragging on the white box in the center of the widget.  Snapping can be used with the scale tool as well.
+    \item The \textbf{Rect Tool} \includegraphics[width=20pt]{tool_rect.png} is generally used in place of the other transformation tools for 2D games and UI elements.  It allows you to easily move and scale rectangular objects in the X and Y dimensions.
+    \item The \textbf{Transform Tool} \includegraphics[width=20pt]{tool_trans.png}, added in a recent version of Unity, combines the Move / Rotate / Scale tools into one multi-purpose widget.
+\end{enumerate}
+
+\subsection{Parenting GameObjects}
+
+Two GameObjects can also be \textbf{Parented} to each other.  Any transformations that are applied to the parent are also applied to the children.  This is useful very often - for example, you might have a sword GameObject that is the child of a character's hand GameObject.  You can parent two GameObjects by clicking and dragging one GameObject on top of another in the Hierarchy view.
+
+\begin{center}
+\centering \noindent
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{parent_ui_1}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{parent_ui_2}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{parent_ui_3}} \\
+How to parent two GameObjects in the hierarchy view
+\end{center}
+
+After two GameObjects are parented, then manipulating the parent will similarly manipulate the child, as shown below:
+
+\begin{center}
+\centering \noindent
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{parent_1}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{parent_2}} $\Big/$
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{parent_3}} \\
+Left: Without transformation.  Middle: Rotating the parent.  Right: Rotating the child
+\end{center}
+
 \section{Composing GameObjects with Components}
+
+\begin{wrapfigure}[13]{r}[50pt]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.25\textwidth]{inspector_camera}\includegraphics[width=0.25\textwidth]{inspector_cube}
+\end{wrapfigure}
+
+
+You may have noticed by now that as you select GameObjects in the scene, the Inspector panel (on the right) updates depending on the currently-selected GameObject.  Let's take a closer look at the Inspector now.  Select the Cube GameObject that we created earlier.  At the top of the inspector there is a block of \textit{transform attributes} -- these are shared by all GameObjects.  When you use any of the transformation manipulators in the Scene View Tools, these values will change accordingly.  You can also edit these values (for the position, rotation, and scale of the object) in the inspector.  Below the transform attributes there are 3 headings: \textit{Mesh Filter, Mesh Renderer,} and \textit{Box Collider}.
+
+Now click on the \textit{Main Camera} GameObject and take a look at the Inspector.  As mentioned, the transform attributes are still there; you can move and rotate the camera as normal (scaling the camera simply does nothing).  However the Mesh Filter, Mesh Renderer, and Box Collider have been replaced by a two blocks: \textit{Camera} and \textit{Audio Listener}.
+
+These blocks represent the different Components of each GameObject.  A \textbf{Component} is the fundamental building block of GameObjects in Unity -- \textit{all} of the behavior of a GameObject is performed by its components.  For example, the behavior of our cube is encapsulated by its components: the \textit{Mesh Filter} and \textit{Mesh Renderer} define what 3D model should be rendered and how, and the \textit{Box Collider} allows the cube to interact with Unity's physics system.  Similarly, the \textit{Camera} allows one to use a GameObject as a viewport and \textit{Audio Listener} enables 3D positional sound.  Components are also configurable -- try fiddling with the Field of View of the camera for example.
+
+The objects that we have looked at so far were made for us by Unity's interface, however you can build GameObjects "from scratch," by starting with an empty GameObject (an \textbf{Empty GameObject} is one without any components).  Create an empty GameObject via \menu{GameObject > Create Empty} and select it in the hierarchy view.  Now click the \menu{Add Component} button, search for \textit{Mesh Filter}, and hit \keys{Enter}.  You should see a \textit{Mesh Filter} added to your GameObject.  
+
+\begin{center}
+\centering \noindent
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{assign_mesh_1}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.15\textwidth]{assign_mesh_2}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{assign_mesh_3}} \\
+Assigning a Mesh to our Mesh Filter
+\end{center}
+
+Now try adding the \textit{Mesh Renderer} and \textit{Box Collider} components.  You will notice that the Cube now appears in the scene, but it is an ugly purple color.  This is because we need to add a Material to the cube.  A \textbf{Material} is a special type of Asset that defines how a 3D model should render.  Let's assign the default material to this mesh -- you can do this by expanding the \menu{Materials} menu and assigning the default material as shown below:
+
+\begin{center}
+\centering \noindent
+\raisebox{-.5\height}{\includegraphics[width=0.20\textwidth]{assign_mat_1}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.25\textwidth]{assign_mat_2}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.15\textwidth]{assign_mat_3}} $\rightarrow$
+\raisebox{-.5\height}{\includegraphics[width=0.20\textwidth]{assign_mat_4}} \\
+Assigning a Material to our new GameObject
+\end{center}
+
+You can create your own material in the Project view.  Navigate to \menu{Assets > Create > Material}, name the material in the Project view, and tweak the material in the inspector.  Then you can apply the material as before.  Most of the time, we won't need to compose GameObjects manually like this.  However, it is very important to understand that all of Unity's builtin functionality is simply exposed through components!
 
 \section{Importing Asset Packages}
 
@@ -238,7 +314,9 @@ Let's go ahead and import the base assets for this lecture.  You can find the ba
 \href{http://stage.gamecreation.org/StuCo/packages/lec02resources.unitypackage}{http://stage.gamecreation.org/StuCo/packages/lec02resources.unitypackage}
 \end{center}
 
-\begin{wrapfigure}{r}[50pt]{0.5\textwidth}
+\pagebreak
+
+\begin{wrapfigure}[13]{r}[50pt]{0.5\textwidth}
     \centering
     \includegraphics[width=0.5\textwidth]{import-diag}
     Unitypackage Import Dialog
@@ -252,14 +330,66 @@ The \textit{Unity Asset Store} is an online store for .unitypackages.  If you do
 
 \section{Example Game 1: Plinko}
 
+\begin{center}
+\centering \noindent
+\includegraphics[width=0.85\textwidth]{plinko}
+\end{center}
+
+After importing the lecture assets, navigate to \directory{Assets/Plinko/Plinko.scene} in the project view and double click on the scene file to open it.  Press play, and you will see a red cube fall between many pegs into buckets at the bottom of the screen.  When the cube falls in a bucket, the score is incremented.  Try moving the cube around before playing -- notice that it realistically collides with the world and moves in a physically-plausible way, no matter where it starts.
+
+\begin{wrapfigure}{r}[50pt]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.3\textwidth]{layers}
+    Changing GameObject layers
+\end{wrapfigure}
+There are two things that are particularly important about the red cube that enable this simple game.  First, the Cube has a Rigidbody component attached.  The \textbf{Rigidbody} component tells Unity to simulate that GameObject via the physics engine.  Unity uses the Collider components attached to the GameObject (or its children) to determine how the object interacts with the world (this cube has a Box Collider attached).  Second, the Cube is marked with a layer called \textit{Can Score}.  All GameObjects belong to a \textbf{Layer} in the scene, and Layers can be used when scripting objects in your game.  In this example, all GameObjects in the \textit{Can Score} layer will increase the score when dropped into a bucket.  All other GameObjects will not be affected.
+
+In the hierarchy view, search for ``Trigger'' and click on one of the GameObjects.  These are the logical GameObjects that help facilitate scoring.  There is a Box Collider here as well, with the ``Is Trigger'' box checked.  ``Is Trigger'' signals to Unity that this collider shouldn't actually be included in physics calculations (that is, nothing should be blocked by it), but it should still receive collision events for scripting purposes.  The other component, called \textit{Basic Trigger}, receives these collision events and passes them on to the scorekeeper script.  The ``Layer Mask'' in \textit{Basic Trigger} is set to \textit{Can Score}, as mentioned.  Importantly, the Basic Trigger component is a \textbf{Custom Script} created specifically for this game.  This is how scripting works in Unity; developers simply create their own custom components!
+
+Now search for the GameObject called ``Score Display Canvas''.  A \textbf{Canvas} component allows you to create UI elements such as text or buttons.  ``Score Display Canvas'' contains a Canvas component (as well as some other Canvas-related supporting components) and a script called \textit{Score Counter}.  The Score Counter script updates the text at the top of the scene.
+
 \section{Example Game 2: Pong}
 
-\section{Example Game 3: Simple First Person Game}
+\begin{center}
+\centering \noindent
+\includegraphics[width=0.85\textwidth]{pong}
+\end{center}
+
+The second example scene is classic Pong!  You can try it out by opening the scene at \directory{Assets/Pong/Pong.scene}.  You can control the P1 paddle with the \keys{W} and \keys{S} keys, and the P2 paddle with \keys{\arrowkeyup} and \keys{\arrowkeydown}.  This game is an example of a 2D game in Unity; 2D games in Unity are created in largely the same way as 3D games.  The main difference is that 2D games tend to use 2D-centric components and the camera ignores the Z dimension.  Click the \menu{2D} button at the top of the Scene view to toggle between 2D and 3D editing modes.  It might also be helpful to switch to the Rect Tool \includegraphics[width=20pt]{tool_rect.png} when working in 2D.
+
+Let's compare the GameObjects in this scene with those in the Plinko example.  As in Plinko, there is a Canvas GameObject that is used to display the score.  A custom component (called \textit{Pong Score}) is attached to the Canvas and handles the score logic.  Now inspect the ``Left Paddle'' GameObject.  The components here are different than with the default 3D cube, but largely similar.  Instead of the Mesh Renderer that is used to render 3D objects, 2D GameObjects use a \textbf{Sprite Renderer} to draw 2D sprites.  Unity actually has two different physics subsystems, one for 2D and one for 3D, so all 2D objects use special 2D physics components.  Instead of a Rigidbody and Box Collider we use a \textbf{Rigidbody 2D} and \textbf{Box Collider 2D}.
+
+The \textit{Pong Paddle} script is used on the ``Paddle Left'' and ``Paddle Right'' GameObjects to facilitate moving the paddles when pressing the corresponding keys.  Try changing the \textit{Speed} attribute to change the movement speed of each paddle.  Similarly the \textit{Pong Bullet} script enables the ball/bullet object to move and bounce correctly off of each paddle and the screen boundaries.
+
+\section{Example Game 3: First Person Game}
+
+\begin{center}
+\centering \noindent
+\includegraphics[width=0.85\textwidth]{fpsgame}
+\end{center}
+
+The final example isn't a complete game like the previous ones, but it is a good introduction to building expansive environments in Unity.  Before we can use it, however, we need to import an optional package that comes with Unity called \textbf{ProBuilder}.
 
 \subsection{Enabling ProBuilder}
 
+ProBuilder is a collection of tools created for Unity that allows developers to easily build complex levels directly inside of the Unity editor.  ProBuilder's tools should feel familiar to anyone who has used brushes in the Source engine or Doom/Quake.  ProBuilder used to be a commercial package, but it was purchased by Unity and integrated for free in the engine.  However, it is not enabled by default.  To import ProBuilder into the project, navigate to \menu{Window > Package Manager}, select \menu{ProBuilder}, and click \menu{Install}.
 
+Now open the demo scene at \directory{Assets/FirstPerson/TestEnvironment.scene}.  You can show the ProBuilder UI by navigating to \menu{Tools > ProBuilder > ProBuilder Window}.  To learn more about how to use ProBuilder to create levels, check out the \href{https://docs.unity3d.com/Packages/com.unity.probuilder@4.0/manual/index.html}{documentation site here}.
+
+\subsection{The First Person Controller}
+
+The \textbf{First Person Controller} is part of the Unity Standard Assets and makes it incredibly easy to get a First Person game up and running.  We are using the First Person Controller in this scene - check out the GameObject called ``FPSController''.  The \textbf{Unity Standard Assets} are a package created by Unity that contains a number of often-useful components and assets (you can download them \href{https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351}{here}).  Try changing the parameters of both the \textit{Character Controller} component and the \textit{First Person Controller} component such as Walk/Run speed and height.
+
+To clarify, the \textit{Character Controller} component is built in to Unity and can be used by scripts to move a character GameObject around the scene.  The \textit{First Person Controller} component is a script that comes with the Unity Standard Assets that allows the player to look around with the mouse and move with \keys{W}\keys{S}\keys{A}\keys{D} controls.  The ``FPSController'' GameObject also contains an \textit{Audio Source} component to generate footstep sounds and a \textit{Rigidbody} to receive physics events.
 
 \section{Exercise}
+
+Design one simple modification to any of the three demos that we went over today, and implement it in Unity.  Some ideas include:
+
+\begin{itemize}
+    \item Modifying Plinko by adding more obstacles, so that it is harder to score well
+    \item Modifying Pong so that the ball's behavior is more complex (it is necessary to be familiar with C\# scripting first to do this)
+    \item Creating a more complex environment in the First Person scene using ProBuilder
+\end{itemize}
 
 \end{document}
