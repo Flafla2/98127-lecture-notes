@@ -1,0 +1,600 @@
+%
+% 98-127
+% Lecture 03: Wrangling Unity
+% 
+% Template adapted from
+% https://www.cs.cmu.edu/~15150/previous-semesters/2012-spring/resources/latex/template.tex
+%
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{times}
+\usepackage{wrapfig}
+\usepackage{fontawesome}
+
+\usepackage{menukeys}
+
+\oddsidemargin0cm
+\topmargin-2cm
+\textwidth16.5cm
+\textheight23.5cm
+
+\newtheorem{lemma}{Lemma}
+
+%% Begin Constants %% <-- (edit these!)
+
+% Lecture Info
+\newcommand{\lecturenum}{3}
+\newcommand{\lecturename}{Wrangling Unity}
+
+% Author of THIS document
+\newcommand{\authorname}{Adrian Biagioli}
+
+% Course Info
+\newcommand{\coursenum}{98-127}
+\newcommand{\coursename}{Game Creation for People Who Want to Make Games}
+\newcommand{\coursesem}{S19}
+
+% Instructors of course
+\newcommand{\instructors}{Adrian Biagioli (\,\href{mailto:abiagiol@andrew.cmu.edu}{abiagiol@andrew.cmu.edu}\,) \\ Carter Williams (\,\href{mailto:ncwillia@andrew.cmu.edu}{ncwillia@andrew.cmu.edu}\,)}
+
+% Math shortcuts
+\newcommand{\work}{\mathcal{W}}
+\newcommand{\expv}{\mathbf{E}}
+\newcommand{\pr}{\mathbf{Pr}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\bigo}{\mathit{O}}
+
+%% End Constants %%
+
+%% Begin syntax highlighting settings %%
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+    language={[Sharp]C},
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    stepnumber=1,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+  }
+
+\lstnewenvironment{csharp}[1][]
+{
+  \lstset{frame=tb,
+    language={[Sharp]C},
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    stepnumber=1,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+  }
+}{}
+
+\lstnewenvironment{pseudocode}[1][]
+{
+    \lstset{
+        mathescape=true,
+        frame=tb,
+        numbers=left, 
+        basicstyle=\small, 
+        numberstyle=\tiny\color{gray},
+        keywordstyle=\color{black}\bfseries\em,
+        commentstyle=\color{dkgreen},
+        stringstyle=\color{mauve},
+        keywords={,input, output, return, datatype, function, in, if, else, foreach, while, begin, end, }
+        numbers=left,
+        breaklines=true,
+        breakatwhitespace=true,
+        tabsize=3
+    }
+}
+{}
+
+% From https://tex.stackexchange.com/questions/95036/continue-line-numbers-in-listings-package
+\def\ContinueLineNumber{\lstset{firstnumber=last}}
+\def\StartLineAt#1{\lstset{firstnumber=#1}}
+\let\numberLineAt\StartLineAt
+
+%% End syntax highlighting settings %%
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{5pt plus 1pt}
+\renewcommand{\baselinestretch}{1.15}
+
+\pagestyle{fancyplain}
+{
+    \lhead{\fancyplain{}{Lecture \lecturenum}}
+    \rhead{\fancyplain{}{\coursenum}}
+    \chead{\fancyplain{}{\lecturename}}
+}
+\setlength{\headheight}{14pt}
+
+\graphicspath{ {./images/} }
+
+\begin{document}
+
+\thispagestyle{plain}
+{
+    \vspace{1.5em}
+    \begin{center}
+    {
+        \huge
+        Lecture \lecturenum \\
+        \vspace{0.5em}
+        \lecturename
+        \vspace{0.4em}
+    } \\
+    {
+        \it
+        \coursenum: \coursename\ \ (\coursesem)
+    } \\
+    \vspace{1.0em}
+    Written by \authorname \\
+    \vspace{0.7em}
+    Instructors:\\ \instructors
+    \end{center}
+}
+
+\section{Objectives}
+
+By the end of this lesson you will be able to:
+
+\noindent These lecture notes were written for {\bf Unity 2018.3.3f1}.
+
+\section{Basic Functions}
+
+\directory{BasicFunctions/StartTester}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class StartTester : MonoBehaviour
+{
+    // Start() is called exactly once when you launch the game
+    private void Start()
+    {
+        // Use Debug.Log(...) to log to the Console view
+        Debug.Log("Hello, World!");
+    }
+}
+\end{csharp}
+
+\directory{BasicFunctions/StartTester}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class StartTester : MonoBehaviour
+{
+    // Start() is called exactly once when you launch the game
+    private void Start()
+    {
+        // Use Debug.Log(...) to log to the Console view
+        Debug.Log("Hello, World!");
+    }
+}
+\end{csharp}
+
+\directory{BasicFunctions/UpdateTester}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class UpdateTester : MonoBehaviour
+{
+    // Update() is called once per frame
+    void Update()
+    {
+        Debug.Log("Hello, World! (a lot)");
+    }
+}
+\end{csharp}
+
+\directory{BasicFunctions/FieldTester}
+\StartLineAt{1}
+\begin{csharp}
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FieldTester : MonoBehaviour
+{
+    // Mark fields with [SerializeField] to allow them to be edited in the inspector
+    [SerializeField]
+    private string StringToPrint;
+
+    private void Start()
+    {
+        Debug.Log(StringToPrint);
+    }
+}
+\end{csharp}
+
+\pagebreak
+
+\directory{BasicFunctions/LotsOfFieldsTester}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+using UnityEngine.Events;
+
+public class LotsOfFieldsTester : MonoBehaviour
+{
+    [Header("Basic Fields")]
+    [SerializeField]
+    private int _IntField;
+    [SerializeField]
+    private float _FloatField = 5.0f;
+    [SerializeField]
+    private string _StringField = "Test Field";
+    [SerializeField]
+    private Vector3 _VectorField = new Vector3(42, 69, 1337);
+
+    [Header("Object Fields")]
+    [SerializeField]
+    private GameObject _GameObjectField;
+    [SerializeField]
+    private Rigidbody _ComponentField1;
+    [SerializeField]
+    private MeshRenderer _ComponentField2;
+    [SerializeField]
+    private Material _AssetField1;
+    [SerializeField]
+    private Mesh _AssetField2;
+
+    [Header("Basic Fields with Controls")]
+    [SerializeField]
+    [Range(-1.0f, 1.0f)]
+    private float _RangeFloatField;
+    [SerializeField]
+    [TextArea]
+    private string _LargeStringField;
+
+    [Header("Weird/Advanced Fields")]
+    [SerializeField]
+    private UnityEvent _EventField;
+    [SerializeField]
+    private LayerMask _LayerMaskField;
+}
+\end{csharp}
+
+\directory{BasicFunctions/ClosedFormAnimation}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class ClosedFormAnimation : MonoBehaviour
+{
+    [SerializeField]
+    private float Radius = 1.0f;
+    [SerializeField]
+    private Vector3 Center = Vector3.zero; // Vector3.zero == new Vector3(0,0,0)
+    [SerializeField]
+    private float Speed = 1.0f;
+
+    private void Update()
+    {
+        float s = Mathf.Sin(Time.time * Speed);
+        float c = Mathf.Cos(Time.time * Speed);
+
+        transform.position = Center + new Vector3(c * Radius, s * Radius, 0);
+    }
+}
+\end{csharp}
+
+\directory{BasicFunctions/DeltaTimeAnimation}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class DeltaTimeAnimation : MonoBehaviour
+{
+    // You don't need [SerializeField] for public variables
+    public float Speed = 1.0f; // speed in m/s
+    public Vector3 Direction = new Vector3(1,0,0);
+    public bool localPosition = false;
+
+    // Update is called once per frame
+    private void Update()
+    {
+        Vector3 delta = Speed * Direction.normalized;
+
+        // This doesn't work!!  What is wrong?
+        if (localPosition)
+            transform.localPosition += delta;
+        else
+            transform.position += delta;
+    }
+}
+\end{csharp}
+
+\directory{BasicFunctions/SimpleMovement}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class SimpleMovement : MonoBehaviour
+{
+    [SerializeField]
+    private string _HorizontalMovementAxis = "Horizontal";
+    [SerializeField]
+    private string _VerticalMovementAxis = "Vertical";
+    [SerializeField]
+    private float _MovementSpeed = 1.0f;
+
+    private void Update()
+    {
+        float hoz = Input.GetAxis(_HorizontalMovementAxis);
+        float vrt = Input.GetAxis(_VerticalMovementAxis);
+
+        Vector3 mov = new Vector3(hoz, vrt, 0);
+
+        if (mov.sqrMagnitude > 1.0f)
+            mov.Normalize(); // make vector have length 1
+
+        transform.position += mov * Time.deltaTime;
+    }
+}
+\end{csharp}
+
+\directory{BasicFunctions/ChangeMaterialTester}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+[RequireComponent(typeof(MeshRenderer))]
+public class ChangeMaterialTester : MonoBehaviour
+{
+    [SerializeField]
+    private Gradient _Gradient;
+    [SerializeField]
+    [Tooltip("Length in seconds to cycle through the gradient")]
+    private float _CycleLength;
+
+    // Note: This field isn't serialized, so we can't edit it in the inspector!
+    private MeshRenderer _Renderer;
+
+    private void Start()
+    {
+        // GetComponent<T> gets the component with type T attached to the current GameObject
+        // If none exist, returns null
+        _Renderer = GetComponent<MeshRenderer>();
+    }
+
+    private void Update()
+    {
+        float a = (Mathf.Cos(Time.time / _CycleLength * (2.0f * Mathf.PI)) + 1.0f) / 2.0f;
+        Color c = _Gradient.Evaluate(a);
+
+        _Renderer.material.color = c;
+    }
+}
+\end{csharp}
+
+\section{Physics Examples}
+
+\textbf{FIRST: } Make sure to talk about Physics materials and Colliders!
+
+\directory{PhysicsExamples/CollisionDetectionTester}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class CollisionDetectionTester : MonoBehaviour
+{
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Just got triggered by GameObject called " + other.gameObject.name);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Just ended trigger by GameObject called " + other.gameObject.name);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Just collided with GameObject called " + collision.gameObject.name);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Debug.Log("Just ended collision with GameObject called " + collision.gameObject.name);
+    }
+}
+\end{csharp}
+
+\directory{PhysicsExamples/CollisionDetectionTester2D}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class CollisionDetectionTester2D : MonoBehaviour
+{
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Just got triggered by GameObject called " + other.gameObject.name);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log("Just ended trigger by GameObject called " + other.gameObject.name);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Just collided with GameObject called " + collision.gameObject.name);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Just ended collision with GameObject called " + collision.gameObject.name);
+    }
+}
+\end{csharp}
+
+\directory{PhysicsExamples/EventOnTrigger}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+using UnityEngine.Events;
+
+public class EventOnTrigger : MonoBehaviour
+{
+    [SerializeField]
+    private UnityEvent _OnEnter;
+    [SerializeField]
+    private UnityEvent _OnExit;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(_OnEnter != null)
+            _OnEnter.Invoke();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(_OnExit != null)
+            _OnExit.Invoke();
+    }
+}
+\end{csharp}
+
+\directory{PhysicsExamples/EventOnLookAndPress}
+\StartLineAt{1}
+\begin{csharp}
+// Don't write this script in front of the class.  But you can show it being used!
+using UnityEngine;
+using UnityEngine.Events;
+
+public class EventOnLookAndPress : MonoBehaviour
+{
+    [SerializeField]
+    private string _ButtonAxis = "Fire1"; // default to left click
+    [SerializeField]
+    private float _ReachDistance = 5;
+    [SerializeField]
+    private UnityEvent _Event;
+
+    private void Update()
+    {
+        if (_Event == null)
+            return;
+
+        Camera cam = Camera.main;
+        if (cam == null) // no main camera
+            return;
+
+        // GetButtonDown is ONLY true on the frame you pressed the button
+        if(Input.GetButtonDown(_ButtonAxis))
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, _ReachDistance))
+            {
+                if (hit.collider.gameObject == gameObject)
+                    _Event.Invoke();
+            }
+        }
+    }
+}
+\end{csharp}
+
+\section{Prefabs}
+
+\textbf{FIRST: } Introduce Prefabs using the Prefab example scene
+
+\directory{PrefabExamples/SpawnPrefabOnButton}
+\StartLineAt{1}
+\begin{csharp}
+using UnityEngine;
+
+public class SpawnPrefabOnButton : MonoBehaviour
+{
+    [SerializeField]
+    private string _ButtonToPress = "Fire1";
+    [SerializeField]
+    private GameObject _PrefabToSpawn;
+    [SerializeField]
+    private Transform _TransformToSpawnAt;
+
+    private void Update()
+    {
+        if(Input.GetButtonDown(_ButtonToPress))
+        {
+            var go = Instantiate<GameObject>(_PrefabToSpawn);
+            go.transform.position = _TransformToSpawnAt == null ? transform.position : _TransformToSpawnAt.position;
+            go.transform.rotation = _TransformToSpawnAt == null ? transform.rotation : _TransformToSpawnAt.rotation;
+        }
+    }
+}
+\end{csharp}
+
+\directory{PrefabExamples/SpawnPrefabInterval}
+\StartLineAt{1}
+\begin{csharp}
+using System.Collections;
+using UnityEngine;
+
+public class SpawnPrefabInterval : MonoBehaviour
+{
+    [SerializeField]
+    private float _SpawnIntervalSeconds = 1.0f;
+    [SerializeField]
+    private GameObject _PrefabToSpawn;
+    [SerializeField]
+    private Transform _TransformToSpawnAt;
+
+    private void Start()
+    {
+        StartCoroutine(SpawnPrefabCoroutine());
+    }
+
+    private IEnumerator SpawnPrefabCoroutine()
+    {
+        while(true)
+        {
+            var go = Instantiate<GameObject>(_PrefabToSpawn);
+            go.transform.position = _TransformToSpawnAt == null ? transform.position : _TransformToSpawnAt.position;
+            go.transform.rotation = _TransformToSpawnAt == null ? transform.rotation : _TransformToSpawnAt.rotation;
+
+            yield return new WaitForSeconds(_SpawnIntervalSeconds);
+        }
+    }
+}
+\end{csharp}
+
+
+
+
+\end{document}
