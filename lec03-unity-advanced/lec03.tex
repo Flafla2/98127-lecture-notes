@@ -169,12 +169,47 @@
 \section{Objectives}
 
 By the end of this lesson you will be able to:
+\begin{itemize}
+    \item Create C\# scripts in the Unity editor, edit them, and apply them to GameObjects as Components
+    \item Understand the basics of Unity's \lstinline|MonoBehaviour|: \lstinline|Start()|, \lstinline|Update()|, and more
+    \item Add easy-to-use interfaces to your component in the Unity Inspector, enabling artists and level designers to
+          tweak parameters in your Unity code.
+    \item Allow your scripts to inter-operate with other Components (of your own creation or Unity's)
+    \item Use Prefabs to dynamically create GameObjects in your scripts
+\end{itemize}
 
 \noindent These lecture notes were written for {\bf Unity 2018.3.3f1}.
 
-\section{Basic Functions}
+\section{Downloading the Base Code}
 
-\directory{BasicFunctions/StartTester}
+You can download all of the base code for this lecture via the following Unitypackage.  In these lecture notes, I've
+included the path to each script before every code sample (for example, the first code sample below is labeled
+\directory{BasicFunctions/StartTester.cs}, which means that you can find \lstinline|StartTester.cs| in the
+\lstinline|BasicFunctions| folder).
+
+\begin{center}
+\href{http://stage.gamecreation.org/StuCo/packages/lec03resources.unitypackage}{http://stage.gamecreation.org/StuCo/packages/lec03resources.unitypackage}
+\end{center}
+
+\noindent See the lecture 2 notes for more info on how to import Unitypackages.
+
+\pagebreak
+
+\section{Cooking Components}
+
+In the last lecture, we went over how to use components created by your team members or Unity themselves to compose
+complex relationships between GameObjects.  But what if we want to define our own custom behavior?  Unity allows you
+to create your own components via a \textbf{C\# Script}.  C\# is a programming language maintained by Microsoft.  It is
+very similar to Java and should feel familiar to anyone who knows a C-based language.  We will not cover how to code
+in this class; if you are interested in learning more about using C\#, you can find plenty of resources online.
+
+To create a new component type, you need to create a C\# Script in the project view.  Open up the project view in Unity,
+right click on it, and select \menu{Create > C\# Script}.  Alternatively you can navigate to \menu{Assets > Create >
+C\# Script}.  Read more about C\# \href{https://docs.microsoft.com/en-us/dotnet/csharp/}{here}.  Name your first script
+\lstinline|StartTester.cs|.  Let's make this script print the familiar ``Hello, World'' to the debugging console.  Type
+the following in the script:
+
+\directory{BasicFunctions/StartTester.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -190,23 +225,8 @@ public class StartTester : MonoBehaviour
 }
 \end{csharp}
 
-\directory{BasicFunctions/StartTester}
-\StartLineAt{1}
-\begin{csharp}
-using UnityEngine;
 
-public class StartTester : MonoBehaviour
-{
-    // Start() is called exactly once when you launch the game
-    private void Start()
-    {
-        // Use Debug.Log(...) to log to the Console view
-        Debug.Log("Hello, World!");
-    }
-}
-\end{csharp}
-
-\directory{BasicFunctions/UpdateTester}
+\directory{BasicFunctions/UpdateTester.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -221,7 +241,7 @@ public class UpdateTester : MonoBehaviour
 }
 \end{csharp}
 
-\directory{BasicFunctions/FieldTester}
+\directory{BasicFunctions/FieldTester.cs}
 \StartLineAt{1}
 \begin{csharp}
 using System.Collections;
@@ -243,7 +263,7 @@ public class FieldTester : MonoBehaviour
 
 \pagebreak
 
-\directory{BasicFunctions/LotsOfFieldsTester}
+\directory{BasicFunctions/LotsOfFieldsTester.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -289,7 +309,7 @@ public class LotsOfFieldsTester : MonoBehaviour
 }
 \end{csharp}
 
-\directory{BasicFunctions/ClosedFormAnimation}
+\directory{BasicFunctions/ClosedFormAnimation.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -313,7 +333,7 @@ public class ClosedFormAnimation : MonoBehaviour
 }
 \end{csharp}
 
-\directory{BasicFunctions/DeltaTimeAnimation}
+\directory{BasicFunctions/DeltaTimeAnimation.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -339,7 +359,7 @@ public class DeltaTimeAnimation : MonoBehaviour
 }
 \end{csharp}
 
-\directory{BasicFunctions/SimpleMovement}
+\directory{BasicFunctions/SimpleMovement.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -368,7 +388,7 @@ public class SimpleMovement : MonoBehaviour
 }
 \end{csharp}
 
-\directory{BasicFunctions/ChangeMaterialTester}
+\directory{BasicFunctions/ChangeMaterialTester.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -406,7 +426,7 @@ public class ChangeMaterialTester : MonoBehaviour
 
 \textbf{FIRST: } Make sure to talk about Physics materials and Colliders!
 
-\directory{PhysicsExamples/CollisionDetectionTester}
+\directory{PhysicsExamples/CollisionDetectionTester.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -435,7 +455,7 @@ public class CollisionDetectionTester : MonoBehaviour
 }
 \end{csharp}
 
-\directory{PhysicsExamples/CollisionDetectionTester2D}
+\directory{PhysicsExamples/CollisionDetectionTester2D.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -464,7 +484,7 @@ public class CollisionDetectionTester2D : MonoBehaviour
 }
 \end{csharp}
 
-\directory{PhysicsExamples/EventOnTrigger}
+\directory{PhysicsExamples/EventOnTrigger.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -491,7 +511,7 @@ public class EventOnTrigger : MonoBehaviour
 }
 \end{csharp}
 
-\directory{PhysicsExamples/EventOnLookAndPress}
+\directory{PhysicsExamples/EventOnLookAndPress.cs}
 \StartLineAt{1}
 \begin{csharp}
 // Don't write this script in front of the class.  But you can show it being used!
@@ -534,7 +554,7 @@ public class EventOnLookAndPress : MonoBehaviour
 
 \textbf{FIRST: } Introduce Prefabs using the Prefab example scene
 
-\directory{PrefabExamples/SpawnPrefabOnButton}
+\directory{PrefabExamples/SpawnPrefabOnButton.cs}
 \StartLineAt{1}
 \begin{csharp}
 using UnityEngine;
@@ -560,7 +580,7 @@ public class SpawnPrefabOnButton : MonoBehaviour
 }
 \end{csharp}
 
-\directory{PrefabExamples/SpawnPrefabInterval}
+\directory{PrefabExamples/SpawnPrefabInterval.cs}
 \StartLineAt{1}
 \begin{csharp}
 using System.Collections;
