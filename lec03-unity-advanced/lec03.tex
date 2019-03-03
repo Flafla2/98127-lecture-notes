@@ -1010,8 +1010,35 @@ public class SpawnPrefabInterval : MonoBehaviour
     }
 }
 \end{csharp}
+\pagebreak
+\section{Exercise: The Bomb Lab}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{bomblab-1}
+\end{center}
+You have been hired by Obedient Cat, a major AAA studio to help out with their next hit game, 
+``Previously Mapped 4!''  You sit down to work on your first day when your manager reveals terrible
+news: unfortunately the notorious \textit{Dr. Evil} has a vendetta against the company and has 
+engaged in cyber terrorism.  Your task today is to defuse a bomb that Dr. Evil has planted in your 
+game!
 
-
-
-
+Open the scene located in the base code at \directory{BombLab/BombLab.unity}.  You need to figure 
+out how to defuse the bomb.  you'll know the bomb is defused because a message saying 
+``DEFUSED!! NICE JOB'' will appear.  As a starting point, I'd recommend taking a look at 
+\directory{BombLab/Bomb.cs}.  This file contains the code that makes the bomb work.
+\begin{itemize}
+    \setlength\itemsep{0.25em}
+    \item You may look at the code in \directory{Bomb.cs}, but you \textbf{may not edit it}.
+    \item You may move, rotate, or scale any object in the scene.
+    \item You \textbf{must} edit the ``Andrew ID'' field of the ``Bomb'' component, which is attached
+          to the ``Bomb'' GameObject: \\ 
+          \includegraphics[height=8em]{bomblab-2} \includegraphics[height=8em]{bomblab-3}
+    \item You \textbf{may not} edit any other fields of the ``Bomb'' GameObject (besides the position /
+          rotation / scale)
+    \item You will probably need to use the UnityEvent exposed by the \textbf{Event On Look And Press}
+          script, on the ``Button 1'' GameObject.  This script works similarly to the ``Event On Trigger''
+          script discussed above: it triggers the given UnityEvent when the player looks at the button
+          and clicks.  Right now, it apparently calls a function called \lstinline|Bomb.Defuse()|.
+          Maybe this will defuse the bomb...?  Perhaps, but Dr. Evil is pretty crafty$\dots$\\
+          \includegraphics[height=6em]{bomblab-4}
+\end{itemize}
 \end{document}
