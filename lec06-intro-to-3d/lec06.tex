@@ -181,7 +181,7 @@ By the end of this lesson you will be able to:
 of writing, Blender 2.8 is new and has radically changed the standard blender keybindings. If you
 would like to read a version of these notes for the previous version 2.79b, see the notes
 \href{http://stage.gamecreation.org/StuCo/lectures/lec06_blender279.pdf}{here}.  We will also
-be looking at blender with a comparative eye towards Unity.  It may be helpful to have
+be looking at Blender with a comparative eye towards Unity.  It may be helpful to have
 some background on using Unity before looking at these notes.  Check out the Intro to Unity notes
 \href{http://stage.gamecreation.org/StuCo/lectures/lec02.pdf}{here}.
 
@@ -189,7 +189,7 @@ some background on using Unity before looking at these notes.  Check out the Int
 
 \textbf{Blender} is a free and open source 3D modeling package that can be used to build assets for
 your games.  You can download blender at \href{https://blender.org}{blender.org} -- make sure to
-download version {\bf 2.79} for compatibility with these lecture notes.  The primary alternative to
+download version {\bf 2.80} for compatibility with these lecture notes.  The primary alternative to
 blender, and a common option in industry, is \textbf{Autodesk Maya}.  However Maya is very expensive
 for commercial use, so we will not use it in this class.  For all but the most advanced tasks,
 blender has feature parity with Maya, however you may need to use Maya if you get a job at a studio.
@@ -225,16 +225,18 @@ panel that you see in the above screenshot is labeled as follows:
     \item The \textbf{Timeline} is used to scrub through animations (we will talk about 3D animation
     in a later lecture).
     \item The \textbf{Info} panel contains common menus like \menu{File} and \menu{Window}, and
-    allows you to change between preset layouts.  If you ever want to reset the blender UI, use the
-    dropdown: \includegraphics[height=1.0em]{layout-default} and select ``Default''.
+    allows you to change between preset layouts.  If you ever want to reset the blender UI to the 
+    default, click the plus button at the top of the interface next to the available {\it Workspaces}
+    \raisebox{-0.25\height}{\includegraphics[height=1.0em]{layout-default}}
+    and select \menu{General>Layout}.  You can also create your own custom Workspaces that use
+    your favorite layouts.
 \end{enumerate}
 
-\begin{wrapfigure}{r}[30pt]{0.17\textwidth}
-    \vspace*{-2em}
-    \includegraphics[width=0.17\textwidth]{editor-type-dropdown}
-\end{wrapfigure}
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{editor-type-dropdown}
+\end{center}
 You may have noticed that at the corner of each panel there is a dropdown.  This dropdown allows
-you to change the \textit{Editor Type} of each panel.  For example, we can change from the 3D view 
+you to change the \textit{Editor Type} of each panel (pictured above).  For example, we can change from the 3D view 
 to the text editor by clicking on the dropdown on the bottom left of the 3D view and selecting ``Text 
 Editor.''  Fun fact: the entire blender front-end is written in python and is fully scriptable and
 extendable.  The text editor is used to write python scripts for blender -- but we won't be using it
@@ -279,7 +281,7 @@ You can navigate the 3D view using the following controls:
 
 \subsection{Working in Object Mode}
 
-\begin{wrapfigure}[4]{r}[30pt]{0.3\textwidth}
+\begin{wrapfigure}[6]{r}[30pt]{0.3\textwidth}
     \centering \vspace*{-3.5em}
     \includegraphics[width=0.3\textwidth]{mode-switcher}
     The Mode Switcher
@@ -292,13 +294,18 @@ you can transform Objects.  Below are some common shortcuts to manipulate object
 shortcuts are different depending on which view is ``active.''})
 
 \begin{itemize}
-    \item Press \keys{Right Mouse Button} to select an object.  \textbf{Important: Left Mouse button
-    does not select objects in blender!}  This is a common point of confusion for new users.
-    \footnote{I know this is really confusing,  but there is hope: in the Blender 2.8 beta, the 
-    developers have changed the default to left-click select.  As you can imagine, this has been a
-    source of debate and nerd wars in the blender community for \textit{decades}!}
-    \item Press \keys{Left Mouse Button} to move the \textit{3D cursor}.  The 3D cursor is used for
-    many 3D operations as a reference point -- for now, though, you can largely ignore it.
+    \item Generally, you use the \keys{Left Mouse Button} to select an object.  However, if you have
+    the {\bf Cursor Tool} (\raisebox{-0.25\height}{\includegraphics[height=2.0em]{cursor-tool}})
+    enabled in the Toolshelf, then the \keys{Left Mouse Button} will instead move the 
+    \textit{3D cursor}.  The 3D cursor is used for many 3D operations as a reference point -- for
+    now, though, you can largely ignore it.  You can always switch back to using LMB to select by
+    activating the {\bf Select Tool} (\raisebox{-0.25\height}{\includegraphics[height=2.0em]{select-tool}},
+    located right next to the cursor tool in the Toolshelf)
+    \item Press \keys{Right Mouse Button} to open a {\it Context Menu}.  The context menu that opens
+    will change based on what you currently have selected.  For example, if you have a cube selected
+    in object mode, then the {\it Object Context Menu} will appear when pressing the \keys{Right
+    Mouse Button}.  This is an easy-starting point to discover what blender allows you to do with a
+    certain object.
     \item Press \keys{G} (``Grab'') to Move an object, \keys{R} (``Rotate'') to Rotate an object,
     or \keys{S} (``Scale'') to Scale an object.  You can move the mouse to control the 
     transformation; click \keys{Left Mouse Button} or press \keys{\return} to apply.  While grabbing
@@ -308,8 +315,9 @@ shortcuts are different depending on which view is ``active.''})
     \keys{Shift+X}, you will constrain the transformation to every axis \textit{except for} the X
     axis--this is useful if you want to move an object along another face.
     \item Alternatively, you can use the on-screen 3D manipulators to move objects.  You can change
-    the type of manipulator on screen by using the selector 
-    (\raisebox{-0.25\height}{\includegraphics[height=1.5em]{manipulator-type-switcher}}) located at the bottom of the 3D View.  You can also use the pivot switcher
+    the type of manipulator on screen by using the toolshelf 
+    (\raisebox{-0.25\height}{\includegraphics[height=2.0em]{transform-move}\ , \includegraphics[height=2.0em]{transform-rotate}\ , \includegraphics[height=2.0em]{transform-scale}}).
+    You can also use the pivot switcher
     (\raisebox{-0.25\height}{\includegraphics[height=1.5em]{pivot-switcher}}) to change the pivot
     point of any transformation.  One useful feature is the ability to change the pivot to the 3D
     cursor.  This allows you to (for example) rotate an object \textit{about} the 3D cursor
@@ -321,11 +329,11 @@ shortcuts are different depending on which view is ``active.''})
     Unity -- cool!
     \item Press \keys{B} to box-select and \keys{C} to circle-select objects.
     \item Press \keys{T} to toggle on and off the Toolshelf.  The toolshelf has clickable buttons
-    for many common editing operations (including all of the shortcuts listed above).
-    \item Press \keys{N} to toggle on and off the \textbf{Properties} panel.  The properties panel
+    for many common editing operations (including many of the shortcuts listed above).
+    \item Press \keys{N} to toggle on and off the \textbf{Exact Editing} panel.  The exact editing panel
     allows you to directly manipulate the position / rotation / scale of whatever you have selected,
     as well as various miscellaneous settings for how the mesh displays in the 3D View.
-    \item Press \keys{A} to select all or deselect all (depending on if anything is selected).
+    \item Press \keys{A} to select all, or double-tap \keys{A} to deselect all.
 \end{itemize}
 
 Blender has an incredibly robust shortcut system -- almost \textit{every} common editing operation
@@ -333,7 +341,7 @@ has a corresponding shortcut.  So while it may be difficult to get used to blend
 it will allow you to do things very quickly.  For example, rotating an object 45 degrees in
 the Z axis is as easy as \\\keys{R} \faAngleRight\ \keys{Z} \faAngleRight\ \keys{4} \faAngleRight\ 
 \keys{5} \faAngleRight\ \keys{\return}.  That being said, it is still very easy to forget all of the random 
-incantations--er--key combinations you need to use to do what you want.  Luckily, pressing \keys{Space} at
+incantations--er--key combinations you need to use to do what you want.  Luckily, pressing \keys{F3} at
 any time will bring up a search bar that allows you to search for any operation.  It will also show any
 relevant key combinations.  You can then hit \keys{\return} to apply the operation.
 \begin{center}
@@ -350,9 +358,9 @@ we have to use polygonal meshes that can be imported to Unity.  If you were, for
 in making a film, or if you wanted to create a very high-detail model that will be later converted
 a game-ready mesh, you may want to look into the other surface types.  Check out the 
 \href{https://docs.blender.org/manual/en/latest/modeling/index.html}{Blender Manual} for more info!
-Also, as always if you don't want to trawl through menus you can use ex \keys{Space+``Add Cube''+\return}
+Also, as always if you don't want to trawl through menus you can use ex \keys{F3+``Add Cube''+\return}
 to add a cube to the scene.  Note that new objects will be placed at the \textit{3D cursor} location.
-If you can't find your 3D cursor, you can change its location in the Properties panel (\keys{N}).
+If you can't find your 3D cursor, you can change its location in the exact editing panel (\keys{N}).
 
 \subsection{Parenting Objects}
 
@@ -360,8 +368,8 @@ Just like in Unity, you can parent two objects to each other in blender.  Any tr
 to the parent will ``trickle down'' to the children in an hierarchical fashion.  You can parent
 objects in two ways:
 \begin{enumerate}
-    \item In the outliner, \textbf{left click and drag} on the \textbf{icon} to the left of one 
-          object, and drag the icon on top of another object
+    \item In the outliner, \textbf{left click and drag} on the
+          object, and drag the icon on top of another object while holding \keys{Shift}.
     \item Select the child object(s), then the parent, and press \keys{Ctrl+P}.
 \end{enumerate}
 Conveniently, parented objects will import to Unity with the same relative transformations.
@@ -379,14 +387,14 @@ make sure you have an object selected or you can not go into Edit Mode.}
 You'll notice a few things when switching from Object to Edit mode.  First, the individual vertices
 of the mesh will be selected.  A \textbf{vertex} (plural \textit{vertices}) is an individual point
 on the mesh.  Vertices are connected by \textbf{edges}, and edges are connected by \textbf{faces}.
-You can select vertices with \keys{Right Mouse Button}, just like how you selected objects before.
-In addition to this, the tools at the Bottom of the 3D view as well as the Toolbar / Properties
+You can select vertices with \keys{Left Mouse Button}, just like how you selected objects before.
+In addition to this, the tools at the Bottom of the 3D view as well as the Toolshelf / Exact editing
 panels update according to the current mode.  It's important to be aware of what mode you're in so
 that you don't get disoriented with the UI.
 
 At the bottom of the 3D view, click on the buttons that look like this:  
 \raisebox{-0.25\height}{\includegraphics[height=1.5em]{select-switcher}} to change between Vertex,
-Edge, or Face selection.  As always, use \keys{Right Mouse Button} to select each type.  You can
+Edge, or Face selection.  As always, use \keys{Left Mouse Button} to select each type.  You can
 hold \keys{Shift} to select multiple elements of your mesh.  Just like in object mode, you can
 press \keys{G} / \keys{R} / \keys{S} to Move / Rotate / Scale parts of your mesh (see ``Working in
 Object Mode'' above).  More complex operations can be accessed via the \menu{Mesh > Vertices},
@@ -409,26 +417,33 @@ these menus (and other submenus), but I will cover the most common / useful belo
     \raisebox{-.45\height}{\includegraphics[height=10em]{delete-1}} $\rightarrow$
     \raisebox{-.45\height}{\includegraphics[height=10em]{delete-2}}
     \ /\ \raisebox{-.45\height}{\includegraphics[height=10em]{delete-3}}\\
-    \vbox{\item \textbf{Subdivide} (Shortcut \keys{W}, then click \menu{Subdivide}): This command divides
+    \vbox{\item \textbf{Subdivide} (Shortcut \keys{Ctrl+F} or select a face and \keys{Right Mouse}, then click \menu{Subdivide}): This command divides
     a face or edge into equal sections:\\
     \includegraphics[height=10em]{subdivide-face} \includegraphics[height=10em]{subdivide-edge}}
-    \item \textbf{Merge} (Shortcut \keys{W}, then click \menu{Merge...}, OR \keys{Alt+M}): Merges
+    \item \textbf{Merge} (Shortcut \keys{Alt+M}, or use the vertex context menu): Merges
     all selected vertices, edges, or faces into a single vertex.  If you are selecting vertices,
     you have a lot of control as to where the merged vertex ends up (for example, you can set it
     to merge to the center of all points you selected to merge, or you can set it to merge to the
     first or last point you selected, etc).
     \item \textbf{Snap} (Shortcut \keys{Shift+S}) will snap the current selection to the cursor,
     other selected objects, or \textit{the grid}.  The snapping grid is useful to keep your selection
-    on a uniform grid -- you can modify the size of the snapping in the \menu{Display>Grid Scale} submenu of
-    Properties (shortcut \keys{N}).  You can also snap all transformations to the grid via the
+    on a uniform grid -- you can modify the size of the snapping in the \menu{Grid Scale} submenu of
+    the {\bf Overlays Panel}.  The Overlays panel is located at the top of the 3D view (see below).
+    Exact Editing panel (shortcut \keys{N}).  You can also snap all transformations to the grid via the
     snap button (\includegraphics[height=1.5em]{snap-settings}) at the bottom of the 3D View.
     You can also use \keys{Shift+S} to snap the 3D cursor to things--notably, you can snap the 3D
     cursor to the origin, which is a fast way to reset the 3D cursor position when you left click
     by accident \faMehO
+    \begin{center}
+        \begin{samepage}
+        \includegraphics[width=0.5\textwidth]{overlays}\\
+        The top of the Overlays panel
+        \end{samepage}
+    \end{center}
     \item \textbf{Loop Cut} (Shortcut \keys{Ctrl+R}) will create a ring around the mesh.  Using
     loop cuts to create new vertices is highly recommended as it maintains good topology of the mesh
     (you generally want to avoid triangles, especially very obtuse ones as they animate badly).
-    \item \textbf{Select Edge Loop} (\keys{Alt+Right Mouse Button} while hovering an edge) selects 
+    \item \textbf{Select Edge Loop} (\keys{Alt+Left Mouse Button} while hovering an edge) selects 
     all the edges that are in a contiguous loop.  This is useful in many situations, for example you
     could select all of the edges around a character's torso.
     \item \textbf{Knife Cut} (Shortcut \keys{K}) will allow you to simply cut through the mesh using
@@ -549,7 +564,8 @@ would ``cut'' the model so that we could lay it out as flatly as possible on the
 cylinder, we would cut out the top and bottom circles, and then we would cut straight down the sides.
 This would allow us to lay down the two circles and ``label'' flat next to each other with no 
 stretching.  We can explicitly tell Blender to cut along specific edges using the \textbf{Mark Seam}
-command.  You can get to this in edit mode via the edges menu (\keys{Ctrl+E}) then select 
+command.  You can get to this in edit mode via the edges menu (\keys{Ctrl+E}, or right click when 
+edge select is enabled in Edit mode) then select 
 \menu{Mark Seam}:
 \begin{center}
     \raisebox{-.45\height}{\includegraphics[height=10em]{seams-1}} $\rightarrow$
@@ -558,8 +574,8 @@ command.  You can get to this in edit mode via the edges menu (\keys{Ctrl+E}) th
     Cutting up a Soup can with \menu{Mark Seam}
 \end{center}
 Next, we need to go ahead and create the UV Map.  First, create a new panel (see the section 
-``Blender Interface Basics'' above) and open the \textbf{UV/Image Editor} View such that the 3D
-View and the UV/Image Editor are placed side-by-side.  Recall that you can change the view of each
+``Blender Interface Basics'' above) and open the \textbf{UV Editor} View such that the 3D
+View and the UV Editor are placed side-by-side.  Recall that you can change the view of each
 panel using the dropdown located in the corner of the panel.  Next, while hovering the mouse over
 the 3D View in edit mode, press \keys{A} to select all, then open the \textbf{UV Mapping Menu}
 with the \keys{U} key.  Select \menu{Unwrap}, and you should see our soup can fully unwrapped:
@@ -567,25 +583,26 @@ with the \keys{U} key.  Select \menu{Unwrap}, and you should see our soup can fu
     \raisebox{-.45\height}{\includegraphics[height=15em]{unwrap-1}} $\rightarrow$
     \raisebox{-.45\height}{\includegraphics[height=15em]{unwrap-2}}
 \end{center}
-You can click the \includegraphics[height=1.5em]{uvsync-button} button at the bottom of the UV/Image
+You can click the \raisebox{-.45\height}{\includegraphics[height=1.5em]{uvsync-button}} button at the bottom of the UV
 editor to allow you to select vertices / edges / faces in 2D.  Just like always, you can use 
 \keys{G}, \keys{R}, and \keys{S} to transform each face in UV space.  \underline{Select all faces} in the
-UV/Image Editor by hovering your mouse over it and pressing \keys{A}, and then navigate to
+UV Editor by hovering your mouse over it and pressing \keys{A}, and then navigate to
 \menu{UVs>Export UV Layout} at the bottom of the editor.  This allows you to save the UV layout as a
 PNG file.  We can now use this as a reference in a standard 2D image editor, like Photoshop or GIMP.
 
 I'll leave creating the texture as an exercise for you.  When the texture has been created, enter
 edit mode again and select all faces on the model (\keys{A}).  Then open the texture via the ``Open''
-menu at the bottom of the UV/Image editor (\includegraphics[height=1.5em]{open-texture-button}).
+menu at the bottom of the UV Editor (\raisebox{-.45\height}{\includegraphics[height=1.5em]{open-texture-button}}).
 Once again, \underline{make sure all faces on the model are selected} before applying the texture,
 and \underline{make sure you are in edit mode}.  Otherwise the texture may not actually apply to the model.
 Next change the ``Render Mode'' of the 3D View to \menu{Texture} via a dropdown at the bottom.
 Here's what I managed to come up with:
 \begin{center}
-    \raisebox{-.45\height}{\includegraphics[height=10em]{texture-render-mode}} $\rightarrow$
-    \raisebox{-.45\height}{\includegraphics[height=15em]{soupcan-finished}}
+    \raisebox{-.45\height}{\includegraphics[height=14em]{texture-render-mode}} $\rightarrow$
+    \raisebox{-.45\height}{\includegraphics[height=12em]{soupcan-finished}}
 \end{center}
-
+To view an object's texture, hold \keys{Z} and select \menu{Look Dev}, or click on the corresponding
+icon on the top right of the 3D view.  This is shown above, left.
 \subsection{UV Mapping Complex Models}
 
 UV Mapping is a very complicated topic, and many people build their careers around being great at 
@@ -616,9 +633,14 @@ models in blender to .fbx format before importing them into Unity.
 You can do this via the menu \menu{File>Export>FBX (.fbx)} at the top of the screen.  You can
 configure the export settings on the left side of the file explorer that pops up:
 \begin{center}
-    \raisebox{-.45\height}{\includegraphics[height=15em]{fbx-export-settings}}\\
+    \includegraphics[width=10em]{fbx-export-settings-1} 
+    \includegraphics[width=10em]{fbx-export-settings-2} 
+    \includegraphics[width=10em]{fbx-export-settings-3} 
+    \includegraphics[width=10em]{fbx-export-settings-4}\\
     FBX Export Settings
 \end{center}
+
+\pagebreak
 More info on these settings can be found 
 \href{https://digitalrune.github.io/DigitalRune-Documentation/html/6f749972-9cb2-4274-b283-c327ba45e379.htm}{at this guide here}.
 You can now simply drag the created FBX file into the Project view in Unity.  You will also need to
@@ -628,7 +650,13 @@ import whatever textures you have created and apply them to a
 \section{Exercise}
 
 The exercise for this class is to \textbf{Model, UV, and texture a container} (What is a container?
-Up to you$\dots$).  Export the model and import it into Unity!
+Up to you$\dots$).  Export the model and import it into Unity!  Some inspiration:
 
+\begin{center}
+\includegraphics[height=15em]{container-1}
+\includegraphics[height=15em]{container-2}\\\vspace{3em}
+\includegraphics[height=17em]{container-3}\ \ 
+\includegraphics[height=17em]{container-4} 
+\end{center}
 
 \end{document}
