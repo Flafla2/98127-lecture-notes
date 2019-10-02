@@ -42,7 +42,7 @@
 % Course Info
 \newcommand{\coursenum}{98-127}
 \newcommand{\coursename}{Game Creation for People Who Want to Make Games}
-\newcommand{\coursesem}{S19}
+\newcommand{\coursesem}{F19}
 
 % Instructors of course
 \newcommand{\instructors}{Adrian Biagioli (\,\href{mailto:abiagiol@andrew.cmu.edu}{abiagiol@andrew.cmu.edu}\,) \\ Carter Williams (\,\href{mailto:ncwillia@andrew.cmu.edu}{ncwillia@andrew.cmu.edu}\,)}
@@ -155,7 +155,7 @@ By the end of this lesson you will be able to:
     \item Utilize the inspector to design levels, given art assets and scripts
 \end{itemize}
 
-\noindent These lecture notes were written for {\bf Unity 2018.3.0f1}.
+\noindent These lecture notes were written for {\bf Unity 2019.2.3f1}.
 
 \section{What is a Game Engine?}
 
@@ -170,7 +170,7 @@ By the end of this lesson you will be able to:
 
 If you haven't already, download Unity:
 \begin{itemize}
-\item You can download Unity at \href{https://store.unity.com}{https://store.unity.com}.  Click on ``Try Personal'' and download the installer to get the latest version.  Make sure to enable Windows and Mac build support in the installer options.
+\item You can download Unity at \href{https://store.unity.com/download}{https://store.unity.com/download}.  Accept the license terms and click ``Download Unity Hub''.  The {\bf Unity Hub} is an application that you can use to browse Unity projects and install new Unity versions.  To install a new Unity Version, navigate to \menu{Installs > Add} in the Unity Hub interface.
 \item If you're a programmer running Windows or Mac, I would recommend downloading Microsoft Visual Studio.  Visual Studio and Visual Studio for Mac both have great integration with Unity and are better than the default MonoDevelop: \href{https://www.visualstudio.com}{https://www.visualstudio.com}.
 \end{itemize}
 
@@ -181,9 +181,9 @@ If you haven't already, download Unity:
 \end{wrapfigure}
 
 
-When you open Unity, you will first see the {\bf project selection screen}.  You may need to create a Unity account—do so if prompted.  Click ``new project'' on the top right of the window.
+When you open Unity Hub, you will first see the {\bf project selection screen}.  You may need to create a Unity account—do so if prompted.  Click ``new project'' on the top right of the window.
 
-Enter a name for your new project (``Lecture 2 Project'') and specify a location for the project folder.  Make sure ``3D'' is checked and ``Enable Unity Analytics'' is unchecked.  Then click {\it create project}.  \textbf{Unity projects are saved in folders on your machine}, so if you browse to the project location you gave then you will find the Unity project files.
+Enter a name for your new project (``Lecture 2 Project'') and specify a location for the project folder.  Make sure ``3D'' is checked.  Then click {\it create project}.  \textbf{Unity projects are saved in folders on your machine}, so if you browse to the project location you gave then you will find the Unity project files.
 
 The Unity editor should now appear.  The editor is divided into \textbf{panels}, each providing a different way to interact with your Unity project.  If your editor doesn’t look like the one on the next page, click \menu{Layout > Default} on the top right of the editor.  Notice that panels can be reorganized and redocked to other panels by clicking and dragging on the tab at the top of each pane.  You can also resize panels and drag them out to their own window.
 
@@ -311,7 +311,7 @@ You can create your own material in the Project view.  Navigate to \menu{Assets 
 
 Let's go ahead and import the base assets for this lecture.  You can find the base assets at the link below:
 \begin{center}
-\href{http://stage.gamecreation.org/StuCo/packages/lec02resources.unitypackage}{http://stage.gamecreation.org/StuCo/packages/lec02resources.unitypackage}
+\href{http://stage.gamecreation.org/StuCo/F19/packages/lec02resources.unitypackage}{http://stage.gamecreation.org/StuCo/F19/packages/lec02resources.unitypackage}
 \end{center}
 
 \pagebreak
@@ -368,13 +368,7 @@ The \textit{Pong Paddle} script is used on the ``Paddle Left'' and ``Paddle Righ
 \includegraphics[width=0.85\textwidth]{fpsgame}
 \end{center}
 
-The final example isn't a complete game like the previous ones, but it is a good introduction to building expansive environments in Unity.  Before we can use it, however, we need to import an optional package that comes with Unity called \textbf{ProBuilder}.
-
-\subsection{Enabling ProBuilder}
-
-ProBuilder is a collection of tools created for Unity that allows developers to easily build complex levels directly inside of the Unity editor.  ProBuilder's tools should feel familiar to anyone who has used brushes in the Source engine or Doom/Quake.  ProBuilder used to be a commercial package, but it was purchased by Unity and integrated for free in the engine.  However, it is not enabled by default.  To import ProBuilder into the project, navigate to \menu{Window > Package Manager}, select \menu{ProBuilder}, and click \menu{Install}.
-
-Now open the demo scene at \directory{Assets/FirstPerson/TestEnvironment.scene}.  You can show the ProBuilder UI by navigating to \menu{Tools > ProBuilder > ProBuilder Window}.  To learn more about how to use ProBuilder to create levels, check out the \href{https://docs.unity3d.com/Packages/com.unity.probuilder@4.0/manual/index.html}{documentation site here}.
+The final example isn't a complete game like the previous ones, but it is a good introduction to building expansive environments in Unity.
 
 \subsection{The First Person Controller}
 
@@ -389,7 +383,7 @@ Design one simple modification to any of the three demos that we went over today
 \begin{itemize}
     \item Modifying Plinko by adding more obstacles, so that it is harder to score well
     \item Modifying Pong so that the ball's behavior is more complex (it is necessary to be familiar with C\# scripting first to do this)
-    \item Creating a more complex environment in the First Person scene using ProBuilder
+    \item Creating a more complex environment in the First Person scene
 \end{itemize}
 
 \end{document}
