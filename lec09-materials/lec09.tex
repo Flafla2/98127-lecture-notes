@@ -1,0 +1,220 @@
+%
+% 98-127
+% Lecture 09: Advanced Topics: Graphics and Lighting
+% 
+% Template adapted from
+% https://www.cs.cmu.edu/~15150/previous-semesters/2012-spring/resources/latex/template.tex
+%
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{times}
+\usepackage{wrapfig}
+\usepackage{fontawesome}
+
+\usepackage{menukeys}
+
+\oddsidemargin0cm
+\topmargin-2cm
+\textwidth16.5cm
+\textheight23.5cm
+
+\newtheorem{lemma}{Lemma}
+
+%% Begin Constants %% <-- (edit these!)
+
+% Lecture Info
+\newcommand{\lecturenum}{9}
+\newcommand{\lecturename}{Advanced Topics: Graphics and Lighting}
+
+% Author of THIS document
+\newcommand{\authorname}{Adrian Biagioli}
+
+% Course Info
+\newcommand{\coursenum}{98-127}
+\newcommand{\coursename}{Game Creation for People Who Want to Make Games}
+\newcommand{\coursesem}{S19}
+
+% Instructors of course
+\newcommand{\instructors}{Adrian Biagioli (\,\href{mailto:abiagiol@andrew.cmu.edu}{abiagiol@andrew.cmu.edu}\,) \\ Carter Williams (\,\href{mailto:ncwillia@andrew.cmu.edu}{ncwillia@andrew.cmu.edu}\,)}
+
+% Math shortcuts
+\newcommand{\work}{\mathcal{W}}
+\newcommand{\expv}{\mathbf{E}}
+\newcommand{\pr}{\mathbf{Pr}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\bigo}{\mathit{O}}
+
+%% End Constants %%
+
+%% Begin syntax highlighting settings %%
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+    language={[Sharp]C},
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    stepnumber=1,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+  }
+
+\lstnewenvironment{csharp}[1][]
+{
+  \lstset{frame=tb,
+    language={[Sharp]C},
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    stepnumber=1,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+  }
+}{}
+
+\lstnewenvironment{pseudocode}[1][]
+{
+    \lstset{
+        mathescape=true,
+        frame=tb,
+        numbers=left, 
+        basicstyle=\small, 
+        numberstyle=\tiny\color{gray},
+        keywordstyle=\color{black}\bfseries\em,
+        commentstyle=\color{dkgreen},
+        stringstyle=\color{mauve},
+        keywords={,input, output, return, datatype, function, in, if, else, foreach, while, begin, end, }
+        numbers=left,
+        breaklines=true,
+        breakatwhitespace=true,
+        tabsize=3
+    }
+}
+{}
+
+% From https://tex.stackexchange.com/questions/95036/continue-line-numbers-in-listings-package
+\def\ContinueLineNumber{\lstset{firstnumber=last}}
+\def\StartLineAt#1{\lstset{firstnumber=#1}}
+\let\numberLineAt\StartLineAt
+
+%% End syntax highlighting settings %%
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{5pt plus 1pt}
+\renewcommand{\baselinestretch}{1.15}
+
+\pagestyle{fancyplain}
+{
+    \lhead{\fancyplain{}{Lecture \lecturenum}}
+    \rhead{\fancyplain{}{\coursenum}}
+    \chead{\fancyplain{}{\lecturename}}
+}
+\setlength{\headheight}{14pt}
+
+\graphicspath{ {./images/} }
+
+\begin{document}
+
+\thispagestyle{plain}
+{
+    \vspace{1.5em}
+    \begin{center}
+    {
+        \huge
+        Lecture \lecturenum \\
+        \vspace{0.5em}
+        \lecturename
+        \vspace{0.4em}
+    } \\
+    {
+        \it
+        \coursenum: \coursename\ \ (\coursesem)
+    } \\
+    \vspace{1.0em}
+    Written by \authorname \\
+    \vspace{0.7em}
+    Instructors:\\ \instructors
+    \end{center}
+}
+
+\section{Objectives}
+
+By the end of this lesson you will be able to:
+\begin{itemize}
+    \item Understand Unity's Material system, and the difference between Shaders and Materials
+    \item Understand the concepts of Physically Based Rendering (PBR) as well as the inputs to Unity's Standard PBR shader
+    \item Bake environment lighting into a texture to support large statically-lit scenes.
+    \item Understand Unity's lighting settings to balance visual fidelity and performance.
+\end{itemize}
+
+\noindent These lecture notes were written for {\bf Unity 2019.2.6}.
+
+\section{What are Materials?}
+
+Up to this point in the course, we have discussed how to load 3D models into your Unity scene as a GameObject, and how to attach behaviors to those GameObjects.  However we have not yet discussed {\it how} those objects are drawn on the screen.  For example, what color do we shade an object at each point?  In a previous lecture, we discussed how to create a UV map of a 3D model to wrap a texture onto it.  Indeed, we can use a texture and a UV map to color an object.  
+
+\begin{enumerate}
+	\item Creating a material in the project view
+	\item Material vs Shader
+	\item Manipulating Material Properties (textures, colors)
+\end{enumerate}
+
+\section{The Standard Shader}
+
+\begin{enumerate}
+	\item Discuss the standard shader from a high level -- maybe talk about the history of shaders (lambert / blinn based specularity) and what motivates the Standard shader.  \textbf{Define PBR (Physically Based Rendering)}
+	\item Big idea: The standard shader is a "meta-shader" that is able to express photoreal surfaces.  Use custom shaders for non-photoreal stuff
+	\item Go over the material charts.  Big idea: Albedo $\neq$ Color!  Especially show effect of albedo on metals
+	\item To demonstrate PBR reflections, demonstrate changing the skybox to an HDR one
+\end{enumerate}
+
+\section{Finding PBR Textures}
+
+\begin{enumerate}
+	\item Find a texture from CC0Textures.com and a HDR from HDRIhaven.com, and show how to import all the maps (via GIMP)
+	\item Smoothness vs Roughness
+	\item Define HDR images (not a simple color, but an \textit{irradiance})
+	\item Demonstrate reflection probes in the room scene
+\end{enumerate}
+
+\section{Unity's Lighting panel and Global Illumination}
+
+\begin{enumerate}
+	\item Explain why we need to bake lighting (performance + complex prebaked lighting)
+	\item Bake lighting in the room scene
+	\item Put a big bright green cube in the middle of the scene and bake again
+	\item Discuss static / lightmap static
+	\item Point lights only support baked shadows
+\end{enumerate}
+
+
+\end{document}
